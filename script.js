@@ -1,12 +1,12 @@
 const portfolioData = {
     hero: {
-        roles: ["AI&ML Engineer", "Computer Vision Specialist", "Python Developer", "Independent-Researcher"],
+        roles: ["AI & ML Engineer", "Computer Vision Specialist", "Python Developer", "Independent Researcher"],
         description: "Building intelligent systems using Computer Vision, Deep Learning, and Predictive Analytics. Currently researching Adaptive Thermal Management Algorithms."
     },
     skills: [
         { category: "Languages", items: ["Python", "Java"] },
-        { category: "Frameworks", items: ["TensorFlow", "PyTorch", "MediaPipe", "FastAPI","DinoV2","YOLOv8n"] },
-        { category: "Tools", items: ["OpenCV", "OpenCV-headless", "Scikit-Learn", "NumPy", "Pandas", "Git", "PyAutoGUI","UMAP","Matplotlib"] },
+        { category: "Frameworks", items: ["TensorFlow", "PyTorch", "MediaPipe", "FastAPI", "DinoV2", "YOLOv8n"] },
+        { category: "Tools", items: ["OpenCV", "OpenCV-headless", "Scikit-Learn", "NumPy", "Pandas", "Git", "PyAutoGUI", "UMAP", "Matplotlib"] },
         { category: "Soft Skills", items: ["Problem Solving", "Leadership", "Project Management", "Critical Thinking"] }
     ],
     experience: [
@@ -94,7 +94,6 @@ const portfolioData = {
     }
 };
 
-// --- DOM ELEMENTS ---
 const elements = {
     typewriter: document.getElementById('typewriter'),
     heroDesc: document.getElementById('hero-desc'),
@@ -104,8 +103,6 @@ const elements = {
     education: document.getElementById('education-container'),
     achievements: document.getElementById('achievements-container')
 };
-
-// --- RENDER FUNCTIONS ---
 
 function renderTypewriter() {
     const roles = portfolioData.hero.roles;
@@ -130,7 +127,7 @@ function renderTypewriter() {
 
         if (!isDeleting && charIndex === currentRole.length) {
             isDeleting = true;
-            typeSpeed = 2000; // Pause at end
+            typeSpeed = 2000;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             roleIndex = (roleIndex + 1) % roles.length;
@@ -206,7 +203,6 @@ function renderAchievements() {
     `).join('');
 }
 
-// --- ANIMATION OBSERVER ---
 function initObserver() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -219,7 +215,6 @@ function initObserver() {
     document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 }
 
-// --- CANVAS BACKGROUND ANIMATION ---
 function initCanvas() {
     const canvas = document.getElementById('bgCanvas');
     const ctx = canvas.getContext('2d');
@@ -264,7 +259,6 @@ function initCanvas() {
         particles.forEach((p, index) => {
             p.update();
             p.draw();
-            // Draw lines between close particles
             for (let j = index; j < particles.length; j++) {
                 const dx = p.x - particles[j].x;
                 const dy = p.y - particles[j].y;
@@ -288,14 +282,11 @@ function initCanvas() {
     animate();
 }
 
-// --- MOBILE DETECTION ---
 function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
 }
 
-// --- CONTACT BUTTON HANDLERS ---
 function initContactButtons() {
-    // Email button - opens default email client with pre-filled recipient
     const emailBtn = document.getElementById('email-btn');
     if (emailBtn) {
         emailBtn.addEventListener('click', (e) => {
@@ -307,7 +298,6 @@ function initContactButtons() {
         });
     }
 
-    // Mobile-only call button
     const callBtnContainer = document.getElementById('call-btn-container');
     if (callBtnContainer) {
         if (isMobileDevice()) {
@@ -326,7 +316,24 @@ function initContactButtons() {
     }
 }
 
-// --- INITIALIZATION ---
+function downloadResearch() {
+    const files = [
+        { url: 'assets/research.pdf', name: 'research.pdf' },
+        { url: 'assets/research2.pdf', name: 'research2.pdf' }
+    ];
+
+    files.forEach((file, index) => {
+        setTimeout(() => {
+            const link = document.createElement('a');
+            link.href = file.url;
+            link.download = file.name;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }, index * 300);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     renderTypewriter();
     renderSkills();
@@ -338,22 +345,3 @@ document.addEventListener('DOMContentLoaded', () => {
     initCanvas();
     initContactButtons();
 });
-function downloadResearch() {
-    // List of files to download
-    const files = [
-        { url: './assets/research.pdf', name: 'research.pdf' },
-        { url: './assets/research2.pdf', name: 'research2.pdf' }
-    ];
-
-    // Trigger downloads with a slight delay to avoid browser blocking
-    files.forEach((file, index) => {
-        setTimeout(() => {
-            const link = document.createElement('a');
-            link.href = file.url;
-            link.download = file.name; // Suggests filename to browser
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }, index * 300); // 300ms delay between clicks
-    });
-}
