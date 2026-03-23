@@ -1,0 +1,45 @@
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #00f2ff;
+}
+
+/* Fade In Up Animation Class */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Card Hover Glow */
+.project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -10px rgba(0, 242, 255, 0.3);
+}
+
+/* Typewriter Cursor */
+.typewriter-cursor::after {
+    content: '|';
+    animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
