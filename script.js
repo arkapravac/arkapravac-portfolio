@@ -318,8 +318,8 @@ function initContactButtons() {
 
 function downloadResearch() {
     const files = [
-        { url: 'assets/research.pdf', name: 'research.pdf' },
-        { url: 'assets/research2.pdf', name: 'research2.pdf' }
+        { url: 'assets/research.pdf.pdf', name: 'research.pdf.pdf' },
+        { url: 'assets/research.pdf.pdf', name: 'research2.pdf.pdf' }
     ];
 
     files.forEach((file, index) => {
